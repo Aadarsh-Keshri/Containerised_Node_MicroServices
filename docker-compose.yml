@@ -37,3 +37,4 @@ services: #all the containers that want to boot and communicate
       - booking-service-node-modules:/developer/nodejs/booking-service/node_modules
 
 #docker compose up -d //run all containers in detached mode kinda like -dit
+#docker compose down
