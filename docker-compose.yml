@@ -38,3 +38,4 @@ services: #all the containers that want to boot and communicate
 
 #docker compose up -d //run all containers in detached mode kinda like -dit
 #docker compose down
+#currently external server calls are not possible
