@@ -1,0 +1,39 @@
+version: "3"
+networks:
+  micro-net:
+    driver: bridge
+volumes:
+  api-gateway-node-modules:
+  flights-service-node-modules:
+  booking-service-node-modules:
+services: #all the containers that want to boot and communicate
+  api_gateway:
+    build: ./API-Gateway #path to Dockerfile
+    networks:
+      - micro-net
+    ports:
+      - "5000:5000" # -p flag wala
+    volumes: #-v flag wala
+      - ./API-Gateway:/developer/nodejs/api-gateway
+      - api-gateway-node-modules:/developer/nodejs/api-gateway/node_modules
+    #environment: //for environment variables
+  flights_service:
+    build: ./Flights
+    networks:
+      - micro-net
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./Flights:/developer/nodejs/flights-service
+      - flights-service-node-modules:/developer/nodejs/flights-service/node_modules
+  booking_service:
+    build: ./Bookings
+    networks:
+      - micro-net
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./Bookings:/developer/nodejs/booking-service
+      - booking-service-node-modules:/developer/nodejs/booking-service/node_modules
+
+#docker compose up -d //run all containers in detached mode kinda like -dit
